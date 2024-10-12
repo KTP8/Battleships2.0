@@ -17,7 +17,7 @@
 
 This project is a command-line-based version of the classic Battleships game. Players can place their ships on a grid and take turns against a computer opponent, trying to guess the locations of each other's ships. The game offers two difficulty levels—easy and hard—where the computer can either make random guesses or use strategic logic to attempt to sink the player's ships.
 
-**Very Important Note:** There are a limited number of commits for this project, and it may appear that the project was completed in a short period. However, this is because the wrong template was initially used, and I had to restart the project with the correct format and so copied over my original code from:  in chunks. Despite the limited commits, the project was developed over ample time, and all code is original and not plagiarised.
+**Very Important Note:** There are a limited number of commits for this project, and it may appear that the project was completed in a short period. However, this is because the wrong template was initially used, and I had to restart the project with the correct format and so copied over my original code from: github.com/ktp8/battleships in chunks. Despite the limited commits, the project was developed over ample time, and all code is original and not plagiarised.
 
 ### Git History with Original Commits:
 [IMG: Git Commit History for Incorrect Template]  
