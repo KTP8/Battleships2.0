@@ -176,3 +176,10 @@ class Battleships:
                 if not ship:  # Ship has been completely sunk
                     return True
         return False
+
+    # Handle computer's turn for both easy and hard levels
+    def computer_turn(self, difficulty="easy"):
+        if difficulty == "easy":
+            self.random_computer_turn()
+        elif difficulty == "hard":
+            self.smart_computer_turn()
