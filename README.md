@@ -3,7 +3,7 @@
 Battleships is a Python terminal game, which runs in the Code Institute mock terminal on Heroku.
 
 Users can select either easy or hard difficulty and try to beat the computer by finding all of the computer's battleships before the computer finds theirs.
-These are the names of the battleships on each player's board followed by the number of coordinates which they occupy:
+These are the names of the battleships on each player’s board, followed by the number of coordinates they occupy:
 - Carrier: 5
 - Battleship: 4
 - Cruiser: 3
@@ -29,7 +29,7 @@ These are the names of the battleships on each player's board followed by the nu
 
 This project is a command-line-based version of the classic Battleships game. Players can place their ships on a grid and take turns against a computer opponent, trying to guess the locations of each other's ships. The game offers two difficulty levels—easy and hard—where the computer can either make random guesses or use strategic logic to attempt to sink the player's ships.
 
-**Very Important Note:** There are a limited number of commits for this project, and it may appear that the project was completed in a short period. However, this is because the wrong template was initially used, and I had to restart the project with the correct format and so copied over my original code from: github.com/ktp8/battleships in chunks. Despite the limited commits, the project was developed over ample time, and all code is original and not plagiarised.
+**Very Important Note:** There are a limited number of commits for this project, and it may appear that the project was completed in a short period. However, this was due to the use of an incorrect template initially, which led to restarting the project in the correct format. I subsequently copied over my original code from [my original workspace](github.com/ktp8/battleships) in chunks. Despite the limited commits, the project was developed over ample time, and all code is original and not plagiarised.
 
 ### Git History with Original Commits:
 ![Screenshot 2024-10-12 at 20 49 18](https://github.com/user-attachments/assets/7ec1b6fb-f461-4ea8-b21b-b7d911fde652)
