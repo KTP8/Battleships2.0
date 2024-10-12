@@ -32,3 +32,20 @@ def display_grid(grid, hide_ships=False, player_board=None):
             else:
                 row_display.append(cell)
         print(f"{idx} " + " ".join(row_display))
+
+# Class for the Battleships game
+class Battleships:
+    def __init__(self):
+        self.player_board = create_grid()
+        self.computer_board = create_grid()
+        self.player_guesses_board = create_grid()
+        self.computer_guesses_board = create_grid()
+        self.player_guesses = []
+        self.computer_guesses = []
+        self.player_sunk_ships = 0
+        self.computer_sunk_ships = 0
+        self.last_computer_hit = None
+        self.last_hit_direction = None
+        self.possible_next_guesses = []
+        self.player_ships = []
+        self.computer_ships = []
