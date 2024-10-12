@@ -167,3 +167,12 @@ class Battleships:
                     print("Miss!")
                     self.player_guesses_board[row][col] = "X"
                 break
+    
+    # Check if the entire ship is sunk
+    def check_if_ship_sunk(self, ships, row, col):
+        for ship in ships:
+            if (row, col) in ship:
+                ship.remove((row, col))
+                if not ship:  # Ship has been completely sunk
+                    return True
+        return False
