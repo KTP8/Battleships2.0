@@ -247,8 +247,9 @@ This game was deployed to Heroku using the following steps:
 3. Create a `requirements.txt` file listing all necessary Python dependencies.
 4. Create a `Procfile` to define the web process.
 5. Once these files were in place, the repository was linked to Heroku, and the app was successfully deployed.
+   
+![Screenshot 2024-10-12 at 21 01 22](https://github.com/user-attachments/assets/3f31e6a3-7031-494f-aeac-28f2c3c67fc3)
 
-[IMG: Heroku Deployment Screenshot]
 
 ## Credits
 ### Content
@@ -256,9 +257,9 @@ This game was deployed to Heroku using the following steps:
 - IBM (Qualification): Python for Data Science, AI & Development (hold credential).
 - Dr.Codie (YouTube): Used to help understand game logic. 
 - BroCode (YouTube): Used to understand necessary commands to deploy smart logic.
+- Wikipedia: Used to establish game rules.
 - ChatGPT: Assisted with spellcheck and grammar check to improve code readability.
 
 ### Media
-- N/A (no external media used for this project).
-
+- Am I Responsive: Used to display how the game runs on different device sizes.
 
