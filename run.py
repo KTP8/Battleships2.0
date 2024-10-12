@@ -54,3 +54,36 @@ class Battleships:
     def display_board_with_ships(self):
         print("\nCurrent board with placed ships:")
         display_grid(self.player_board)
+
+    # Place a ship on a grid with real-time display of ship placement
+    def place_ship(self, board, ship_size, ship_name):
+        while True:
+            if board == self.player_board:
+                self.display_board_with_ships()  # Show current state of the board with ships
+                print(f"\nPlace your {ship_name} (size {ship_size}).")
+                orientation = input("Choose orientation (H for horizontal, V for vertical): ").upper() 
+                print("\nCoordinate system is as follows: top left corner of the board is (0,0) and bottom right corner is (9,9)")
+                print("\nHorizontal ships fill the spaces from left (start coordinate) to right & Vertical ships fill the spaces from top (start coordinate) down.")
+                print("\nEnter starting coordinates as (row,col) between (0,0) and (9,9).")
+                row, col = map(int, input(f"Enter starting coordinates for your {ship_name} (row,col) without parenthesis: ").split(","))
+            else:
+                orientation = random.choice(["H", "V"])
+                row, col = random.randint(0, 9), random.randint(0, 9)
+
+            ship_coordinates = []
+
+            if orientation == "H":
+                if col + ship_size <= 10 and all(board[row][c] == " " for c in range(col, col + ship_size)):
+                    for c in range(col, col + ship_size):
+                        board[row][c] = "O"  # Use "O" to represent ships
+                        ship_coordinates.append((row, c))
+                    break
+            elif orientation == "V":
+                if row + ship_size <= 10 and all(board[r][col] == " " for r in range(row, row + ship_size)):
+                    for r in range(row, row + ship_size):
+                        board[r][col] = "O"  # Use "O" to represent ships
+                        ship_coordinates.append((r, col))
+                    break
+
+            if board == self.player_board:
+                print("Invalid placement. Try again.")
