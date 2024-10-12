@@ -62,8 +62,8 @@ class Battleships:
                 self.display_board_with_ships()  # Show current state of the board with ships
                 print(f"\nPlace your {ship_name} (size {ship_size}).")
                 orientation = input("Choose orientation (H for horizontal, V for vertical): ").upper() 
-                print("\nCoordinate system is as follows: top left corner of the board is (0,0) and bottom right corner is (9,9)")
-                print("\nHorizontal ships fill the spaces from left (start coordinate) to right & Vertical ships fill the spaces from top (start coordinate) down.")
+                print("\nCoordinate system is as follows: top left corner of the board is (0,0) \nand bottom right corner is (9,9)")
+                print("\nHorizontal ships fill the spaces from left (start coordinate) to right & \nVertical ships fill the spaces from top (start coordinate) down.")
                 print("\nEnter starting coordinates as (row,col) between (0,0) and (9,9).")
                 row, col = map(int, input(f"Enter starting coordinates for your {ship_name} (row,col) without parenthesis: ").split(","))
             else:
@@ -262,7 +262,7 @@ class Battleships:
         print("- 'O' represents placement of your ships.")
         print("- 'X' represents a missed hit.")
         print("- '*' represents a successful hit.")
-        print("You will place your ships and then take turns guessing where the computer's ships are located.")
+        print("You will place your ships and then take turns guessing where the \ncomputer's ships are located.")
         print("The computer will also guess where your ships are hidden.")
         print("The game ends when one player sinks all of the other's ships!\n")
 
