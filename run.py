@@ -12,3 +12,6 @@ SHIP_SIZES = {
     "Submarine": 3,
     "Destroyer": 2
 }
+# Helper function to create an empty 10x10 grid
+def create_grid():
+    return [[" " for _ in range(10)] for _ in range(10)]
