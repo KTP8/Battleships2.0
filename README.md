@@ -12,6 +12,7 @@ These are the names of the battleships on each player's board followed by the nu
 
 [Here is a live version of my project - Click to Play!](https://battleships-ktp8-26036706a071.herokuapp.com/)
 
+![Screenshot 2024-10-12 at 20 47 53](https://github.com/user-attachments/assets/d4d3e8fb-81d9-44a4-9ea1-ca893c3153a6)
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -31,8 +32,10 @@ This project is a command-line-based version of the classic Battleships game. Pl
 **Very Important Note:** There are a limited number of commits for this project, and it may appear that the project was completed in a short period. However, this is because the wrong template was initially used, and I had to restart the project with the correct format and so copied over my original code from: github.com/ktp8/battleships in chunks. Despite the limited commits, the project was developed over ample time, and all code is original and not plagiarised.
 
 ### Git History with Original Commits:
-[IMG: Git Commit History for Incorrect Template]  
-[IMG: Git Commit History for Correct Template]
+![Screenshot 2024-10-12 at 20 49 18](https://github.com/user-attachments/assets/7ec1b6fb-f461-4ea8-b21b-b7d911fde652)
+![Screenshot 2024-10-12 at 20 49 49](https://github.com/user-attachments/assets/b98c9572-60ee-4de7-805b-33e9a3313034)
+![Screenshot 2024-10-12 at 20 50 09](https://github.com/user-attachments/assets/925a4f25-0119-4376-a323-fed52eff42dc)
+![Screenshot 2024-10-12 at 20 50 23](https://github.com/user-attachments/assets/edaf75c1-a766-47b2-ab95-8645a1e4776b)
 
 ---
 
@@ -76,6 +79,12 @@ This project is a command-line-based version of the classic Battleships game. Pl
 
 - The player's guess board and the computer's guess board (which shows the player's ship placements) are displayed after each turn.
 - Hits are marked with "*", and misses with "X".
+  
+![Screenshot 2024-10-12 at 20 51 12](https://github.com/user-attachments/assets/e5940c28-ab98-4391-a8e0-2f0d35c19640)
+
+![Screenshot 2024-10-12 at 20 57 11](https://github.com/user-attachments/assets/34468934-158b-415b-94c8-b9a8a1e812ee)
+
+![Screenshot 2024-10-12 at 20 57 36](https://github.com/user-attachments/assets/eda4c735-649d-4e43-b8c3-9b56fd254503)
 
 ---
 
@@ -85,7 +94,11 @@ Here’s a detailed and comprehensive snippet showcasing two key features of the
 
 ### Ship Placement Preview:
 
-Each time a player places a ship, the game shows a real-time preview of the current ship layout on the board. This feature ensures that players can visualize their ship positions after every placement, preventing overlap or out-of-bounds errors. Here's how the preview is handled:
+Each time a player places a ship, the game shows a real-time preview of the current ship layout on the board. This feature ensures that players can visualize their ship positions after every placement, preventing overlap or out-of-bounds errors.
+
+![Screenshot 2024-10-12 at 20 52 21](https://github.com/user-attachments/assets/70c7d793-3bbb-47d2-bf65-c7b19a11c2b8)
+
+ Here's how the preview is handled:
 
 ```
 def place_ship(self, board, ship_size, ship_name):
@@ -121,7 +134,16 @@ def place_ship(self, board, ship_size, ship_name):
 The player has a clear understanding of where their ships are located on the grid. This feature minimizes errors in ship placement, allowing the player to better strategize their defense against the computer.
 
 ### Ship Adjustment Function:
-Before starting the guessing phase, players can review their ship layout and adjust any ships they are not satisfied with. This function allows players to move a specific ship to a new location:
+
+Before starting the guessing phase, players can review their ship layout and adjust any ships they are not satisfied with.
+
+![Screenshot 2024-10-12 at 20 53 22](https://github.com/user-attachments/assets/a8ec0075-9e44-4581-b531-60041e31eea0)
+
+![Screenshot 2024-10-12 at 20 54 31](https://github.com/user-attachments/assets/56cda7c0-4ffa-4a88-a7e6-63a3e47934be)
+
+![Screenshot 2024-10-12 at 20 55 10](https://github.com/user-attachments/assets/8bff3bf1-54a8-4c48-a679-362135e1cc4d)
+
+ This function allows players to move a specific ship to a new location:
 
 ```
 def review_ship_placement(self):
