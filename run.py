@@ -87,3 +87,9 @@ class Battleships:
 
             if board == self.player_board:
                 print("Invalid placement. Try again.")
+                
+        # Add ship coordinates to the respective player/computer's ship list
+        if board == self.player_board:
+            self.player_ships.append(ship_coordinates)
+        else:
+            self.computer_ships.append(ship_coordinates)
