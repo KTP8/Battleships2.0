@@ -132,7 +132,8 @@ class Battleships:
         print(f"\nEnter new placement for {ship_name} (size {size}):")
         self.place_ship(self.player_board, size, ship_name)
 
-     # Validate a guess to ensure it is within bounds and has not been guessed already
+
+    # Validate a guess to ensure it is within bounds and has not been guessed already
     def validate_guess(self, guess, guesses_board):
         try:
             row, col = map(int, guess.split(","))
@@ -146,3 +147,23 @@ class Battleships:
         except ValueError:
             print("Invalid input. Please enter row,col (e.g., 2,3).")
             return False
+
+    # Handle player's turn
+    def player_turn(self):
+        while True:
+            guess = input("Enter your guess (row,col) between (0,0) and (9,9) without parenthesis: ")
+            validated_guess = self.validate_guess(guess, self.player_guesses_board)
+            if validated_guess:
+                row, col = validated_guess
+                self.player_guesses.append((row, col))
+                if self.computer_board[row][col] == "O":
+                    print("Hit!")
+                    self.player_guesses_board[row][col] = "*"
+                    self.computer_board[row][col] = "*"
+                    if self.check_if_ship_sunk(self.computer_ships, row, col):
+                        self.player_sunk_ships += 1
+                        print("Congratulations! You sank a computer's ship.")
+                else:
+                    print("Miss!")
+                    self.player_guesses_board[row][col] = "X"
+                break
