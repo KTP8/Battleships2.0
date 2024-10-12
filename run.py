@@ -49,3 +49,8 @@ class Battleships:
         self.possible_next_guesses = []
         self.player_ships = []
         self.computer_ships = []
+
+    # Display board after placing a ship to show its position
+    def display_board_with_ships(self):
+        print("\nCurrent board with placed ships:")
+        display_grid(self.player_board)
