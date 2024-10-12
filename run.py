@@ -131,3 +131,18 @@ class Battleships:
         size = SHIP_SIZES[ship_name]
         print(f"\nEnter new placement for {ship_name} (size {size}):")
         self.place_ship(self.player_board, size, ship_name)
+
+     # Validate a guess to ensure it is within bounds and has not been guessed already
+    def validate_guess(self, guess, guesses_board):
+        try:
+            row, col = map(int, guess.split(","))
+            if (row < 0 or row >= 10) or (col < 0 or col >= 10):
+                print("Coordinates out of bounds. Please enter coordinates between (0,0) and (9,9) without parenthesis.")
+                return False
+            if guesses_board[row][col] != " ":
+                print("You have already guessed those coordinates. Try again.")
+                return False
+            return (row, col)
+        except ValueError:
+            print("Invalid input. Please enter row,col (e.g., 2,3).")
+            return False
