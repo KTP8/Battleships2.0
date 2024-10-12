@@ -65,7 +65,7 @@ class Battleships:
                 print("\nCoordinate system is as follows: top left corner of the board is (0,0) \nand bottom right corner is (9,9)")
                 print("\nHorizontal ships fill the spaces from left (start coordinate) to right & \nVertical ships fill the spaces from top (start coordinate) down.")
                 print("\nEnter starting coordinates as (row,col) between (0,0) and (9,9).")
-                row, col = map(int, input(f"Enter starting coordinates for your {ship_name} (row,col) without parenthesis: ").split(","))
+                row, col = map(int, input(f"Enter starting coordinates for your {ship_name} \n(row,col) WITHOUT parenthesis '()': ").split(","))
             else:
                 orientation = random.choice(["H", "V"])
                 row, col = random.randint(0, 9), random.randint(0, 9)
@@ -138,7 +138,7 @@ class Battleships:
         try:
             row, col = map(int, guess.split(","))
             if (row < 0 or row >= 10) or (col < 0 or col >= 10):
-                print("Coordinates out of bounds. Please enter coordinates between (0,0) and (9,9) without parenthesis.")
+                print("Coordinates out of bounds. \nPlease enter coordinates between (0,0) and (9,9) WITHOUT parenthesis '()'.")
                 return False
             if guesses_board[row][col] != " ":
                 print("You have already guessed those coordinates. Try again.")
@@ -151,7 +151,7 @@ class Battleships:
     # Handle player's turn
     def player_turn(self):
         while True:
-            guess = input("Enter your guess (row,col) between (0,0) and (9,9) without parenthesis: ")
+            guess = input("Enter your guess (row,col) \nbetween (0,0) and (9,9) WITHOUT parenthesis '()': ")
             validated_guess = self.validate_guess(guess, self.player_guesses_board)
             if validated_guess:
                 row, col = validated_guess
