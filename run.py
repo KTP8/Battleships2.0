@@ -93,3 +93,12 @@ class Battleships:
             self.player_ships.append(ship_coordinates)
         else:
             self.computer_ships.append(ship_coordinates)
+
+    # Place all ships for a player
+    def place_all_ships(self):
+        print("Place your ships on the board.")
+        for ship, size in SHIP_SIZES.items():
+            self.place_ship(self.player_board, size, ship)
+        print("\nComputer is placing its ships.")
+        for ship, size in SHIP_SIZES.items():
+            self.place_ship(self.computer_board, size, ship)
