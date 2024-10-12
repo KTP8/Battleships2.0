@@ -183,3 +183,67 @@ class Battleships:
             self.random_computer_turn()
         elif difficulty == "hard":
             self.smart_computer_turn()
+    
+    def random_computer_turn(self):
+        while True:
+            row, col = random.randint(0, 9), random.randint(0, 9)
+            if (row, col) not in self.computer_guesses:
+                self.computer_guesses.append((row, col))
+                print(f"Computer guessed: {row},{col}")
+                if self.player_board[row][col] == "O":
+                    print("Computer hit one of your ships!")
+                    self.computer_guesses_board[row][col] = "*"
+                    self.player_board[row][col] = "*"
+                    self.last_computer_hit = (row, col)
+                    if self.check_if_ship_sunk(self.player_ships, row, col):
+                        self.computer_sunk_ships += 1
+                        print(f"The computer has sunk one of your ships!")
+                        self.last_computer_hit = None
+                else:
+                    print("Computer missed!")
+                    self.computer_guesses_board[row][col] = "X"
+                    self.last_computer_hit = None
+                break
+
+    # Smart logic for hard difficulty
+    def smart_computer_turn(self):
+        if self.last_computer_hit and self.last_hit_direction:
+            row, col = self.last_computer_hit
+            if self.last_hit_direction == "H":
+                possible_guesses = [(row, col + 1), (row, col - 1)]
+            else:
+                possible_guesses = [(row + 1, col), (row - 1, col)]
+        elif self.last_computer_hit:
+            row, col = self.last_computer_hit
+            possible_guesses = [(row + 1, col), (row - 1, col), (row, col + 1), (row, col - 1)]
+            random.shuffle(possible_guesses)
+        else:
+            self.random_computer_turn()
+            return
+
+        for r, c in possible_guesses:
+            if (r, c) not in self.computer_guesses and 0 <= r < 10 and 0 <= c < 10:
+                self.computer_guesses.append((r, c))
+                print(f"Computer guessed: {r},{c}")
+                if self.player_board[r][c] == "O":
+                    print("Computer hit one of your ships!")
+                    self.computer_guesses_board[r][c] = "*"
+                    self.player_board[r][c] = "*"
+                    self.last_computer_hit = (r, c)
+                    if self.check_if_ship_sunk(self.player_ships, r, c):
+                        self.computer_sunk_ships += 1
+                        print(f"The computer has sunk one of your ships!")
+                        self.last_computer_hit = None
+                        self.last_hit_direction = None
+                    else:
+                        if self.last_hit_direction is None:
+                            if r == row:
+                                self.last_hit_direction = "H"
+                            else:
+                                self.last_hit_direction = "V"
+                else:
+                    print("Computer missed!")
+                    self.computer_guesses_board[r][c] = "X"
+                    if self.last_hit_direction:
+                        self.last_hit_direction = None
+                    break
