@@ -102,3 +102,32 @@ class Battleships:
         print("\nComputer is placing its ships.")
         for ship, size in SHIP_SIZES.items():
             self.place_ship(self.computer_board, size, ship)
+
+    # Review ship placement and give player option to modify
+    def review_ship_placement(self):
+        while True:
+            print("\nYour final ship placement:")
+            display_grid(self.player_board)
+            happy = input("Are you happy with your ship placement? (yes/no): ").lower()
+            if happy == "yes":
+                break
+            else:
+                print("\nCurrent ship placements:")
+                for i, ship in enumerate(SHIP_SIZES.keys()):
+                    print(f"{i+1}. {ship}: {self.player_ships[i]}")
+                ship_to_move = input("Enter the name of the ship you want to move: ").capitalize()
+                if ship_to_move in SHIP_SIZES:
+                    self.move_ship(ship_to_move)
+                else:
+                    print("Invalid ship name. Please try again.")
+
+    # Move a ship to new coordinates
+    def move_ship(self, ship_name):
+        index = list(SHIP_SIZES.keys()).index(ship_name)
+        old_coordinates = self.player_ships[index]
+        for r, c in old_coordinates:
+            self.player_board[r][c] = " "  # Clear old ship position
+
+        size = SHIP_SIZES[ship_name]
+        print(f"\nEnter new placement for {ship_name} (size {size}):")
+        self.place_ship(self.player_board, size, ship_name)
