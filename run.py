@@ -254,3 +254,52 @@ class Battleships:
             if "O" in row:
                 return False
         return True
+
+    # Main game loop with alternating turns
+    def play_game(self, difficulty="easy"):
+        print("Welcome to Battleships!")
+        print("\nInstructions:")
+        print("- 'O' represents placement of your ships.")
+        print("- 'X' represents a missed hit.")
+        print("- '*' represents a successful hit.")
+        print("You will place your ships and then take turns guessing where the computer's ships are located.")
+        print("The computer will also guess where your ships are hidden.")
+        print("The game ends when one player sinks all of the other's ships!\n")
+
+        player_name = input("Enter your name: ")
+        print(f"Hello, {player_name}. Let's start!")
+
+        self.place_all_ships()
+
+        self.review_ship_placement()
+
+        while True:
+            # Display scoreboard
+            print(f"\nScoreboard: {player_name} {self.player_sunk_ships} - {self.computer_sunk_ships} Computer")
+            
+            # Player's turn
+            print("\nYour Guess Board:")
+            display_grid(self.player_guesses_board)
+            print("\nComputer's Guess Board (with your ships visible):")
+            display_grid(self.computer_guesses_board, hide_ships=True, player_board=self.player_board)  # Ensure ships are visible
+            self.player_turn()
+
+            if self.all_ships_sunk(self.computer_board):
+                print(f"\nThe score is {player_name} 5 - {self.computer_sunk_ships} Computer.")
+                print(f"Congratulations, {player_name}! You sank all the computer's ships. You win!")
+                break
+
+            # Computer's turn
+            print("\nComputer's turn:")
+            self.computer_turn(difficulty=difficulty)
+
+            if self.all_ships_sunk(self.player_board):
+                print(f"\nThe score is {player_name} {self.player_sunk_ships} - 5 Computer.")
+                print("All your ships have been sunk. The computer wins.")
+                break
+
+# Start the game
+if __name__ == "__main__":
+    difficulty = input("Choose difficulty (easy/hard): ").lower()
+    game = Battleships()
+    game.play_game(difficulty=difficulty)
