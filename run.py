@@ -247,3 +247,10 @@ class Battleships:
                     if self.last_hit_direction:
                         self.last_hit_direction = None
                     break
+
+    # Check if all ships have been sunk
+    def all_ships_sunk(self, board):
+        for row in board:
+            if "O" in row:
+                return False
+        return True
