@@ -1,6 +1,17 @@
 # Battleships Game
 
-[IMG: Project Screenshot]
+Battleships is a Python terminal game, which runs in the Code Institute mock terminal on Heroku.
+
+Users can select either easy or hard difficulty and try to beat the computer by finding all of the computer's battleships before the computer finds theirs.
+These are the names of the battleships on each player's board followed by the number of coordinates which they occupy:
+- Carrier: 5
+- Battleship: 4
+- Cruiser: 3
+- Submarine: 2
+- Destroyer: 2
+
+[Here is a live version of my project - Click to Play!](https://battleships-ktp8-26036706a071.herokuapp.com/)
+
 
 ## Table of Contents
 1. [Introduction](#introduction)
