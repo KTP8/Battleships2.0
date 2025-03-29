@@ -64,6 +64,21 @@ def get_valid_coordinates(ship_name):
             print(f"Unexpected error: {e}. Please try again.")
 
 
+def wait_for_enter(prompt_message):
+    """
+    Display a prompt and loop until only Enter is pressed.
+    
+    Args:
+        prompt_message (str): The message to display.
+    """
+    while True:
+        key = input(prompt_message)
+        if key == "":
+            break
+        else:
+            print("Invalid input. Please press only Enter.")
+
+
 # ---------------------------
 # End Helper Functions
 # ---------------------------
@@ -234,7 +249,8 @@ class Battleships:
                 print("Coordinates out of bounds. Please enter coordinates between (0,0) and (9,9) WITHOUT parenthesis.")
                 return False
             if guesses_board[row][col] != " ":
-                print("Unlucky! You've already taken a shot there - what a waste of a go! Unfortunately, the game must go on...")
+                print("Unlucky! You've already taken a shot there - what a waste of a go! "
+                      "Unfortunately, the game must go on...")
                 return "duplicate"
             return (row, col)
         except ValueError:
@@ -321,7 +337,7 @@ class Battleships:
 
     def smart_computer_turn(self):
         """
-        Advanced guessing strategy for computer on hard difficulty.
+        Use an advanced guessing strategy for computer on hard difficulty.
         """
         if self.last_computer_hit and self.last_hit_direction:
             row, col = self.last_computer_hit
@@ -389,9 +405,9 @@ class Battleships:
         print("- 'O' represents placement of your ships.")
         print("- 'X' represents a missed hit.")
         print("- '*' represents a successful hit.")
-        print("Ships are placed on a 10x10 grid. The game proceeds in stages to ensure "
-              "all messages are visible on a terminal of 80x24.")
-        print("After each guess, press Enter as instructed to view messages and continue.")
+        print("Ships are placed on a 10x10 grid. The game proceeds in stages so that")
+        print("all messages remain visible on a terminal of 80x24.")
+        print("After each stage, press Enter as instructed to view messages and continue.")
         print("The game ends when one player sinks all of the other's ships!\n")
 
         while True:
@@ -415,45 +431,26 @@ class Battleships:
             display_grid(self.player_guesses_board)
             print("\nComputer's Guess Board (with your ships visible):")
             display_grid(self.computer_guesses_board, hide_ships=True, player_board=self.player_board)
-            
-            # ----- Stage A: Wait for user to proceed after player's turn -----
+
+            # Player's turn
             self.player_turn()
             print("\nPress Enter to view the scoreboard and proceed to the computer's turn.")
-            while True:
-                key = input("Press Enter to continue: ")
-                if key == "":
-                    break
-                else:
-                    print("Invalid input. Please press only Enter.")
+            wait_for_enter("Press Enter to continue: ")
 
             print(f"\nScoreboard: {player_name} {self.player_sunk_ships} - {self.computer_sunk_ships} Computer")
-            
-            # Proceed to computer's turn
             print("Press Enter to let the computer take its turn.")
-            while True:
-                key = input("Press Enter to continue: ")
-                if key == "":
-                    break
-                else:
-                    print("Invalid input. Please press only Enter.")
-            
+            wait_for_enter("Press Enter to continue: ")
+
+            # Computer's turn
             self.computer_turn(difficulty=difficulty)
 
-            # ----- End Stage A modifications -----
+            print("\nPress Enter to view the updated guess boards and begin your next turn.")
+            wait_for_enter("Press Enter to continue: ")
 
-            # Check if computer's ships are all sunk
             if self.all_ships_sunk(self.computer_board):
                 print(f"\nThe score is {player_name} 5 - {self.computer_sunk_ships} Computer.")
                 print(f"Congratulations, {player_name}! You sank all the computer's ships. You win!")
                 break
-
-            print("\nPress Enter to view guess boards and begin your next turn.")
-            while True:
-                key = input("Press Enter to continue: ")
-                if key == "":
-                    break
-                else:
-                    print("Invalid input. Please press only Enter.")
 
             if self.all_ships_sunk(self.player_board):
                 print(f"\nThe score is {player_name} {self.player_sunk_ships} - 5 Computer.")
