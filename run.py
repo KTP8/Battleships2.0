@@ -4,6 +4,10 @@
 
 import random
 
+# ---------------------------
+# Global Definitions
+# ---------------------------
+
 # Define ship types and their sizes
 SHIP_SIZES = {
     "Carrier": 5,
@@ -21,7 +25,7 @@ SHIP_SIZES = {
 def get_valid_orientation():
     """
     Prompt the user for an orientation (H/V) with exception handling.
-
+    
     Returns:
         str: A valid orientation ("H" or "V").
     """
@@ -40,10 +44,10 @@ def get_valid_orientation():
 def get_valid_coordinates(ship_name):
     """
     Prompt for starting coordinates for a ship with full validation.
-
+    
     Args:
         ship_name (str): The name of the ship.
-
+        
     Returns:
         tuple: Two integers representing (row, col).
     """
@@ -64,15 +68,10 @@ def get_valid_coordinates(ship_name):
             print(f"Unexpected error: {e}. Please try again.")
 
 
-# ---------------------------
-# End Helper Functions
-# ---------------------------
-
-
 def create_grid():
     """
     Create and return an empty 10x10 grid.
-
+    
     Returns:
         list: A 10x10 list of lists filled with spaces.
     """
@@ -82,7 +81,7 @@ def create_grid():
 def display_grid(grid, hide_ships=False, player_board=None):
     """
     Display a grid with labels for rows and columns.
-
+    
     Args:
         grid (list): The grid to display.
         hide_ships (bool): If True, hide ships not on the player's board.
@@ -135,7 +134,7 @@ class Battleships:
     def place_ship(self, board, ship_size, ship_name):
         """
         Place a ship on a board with real-time display and validation.
-
+        
         Args:
             board (list): The board to place the ship on.
             ship_size (int): The size of the ship.
@@ -212,7 +211,7 @@ class Battleships:
     def move_ship(self, ship_name):
         """
         Move a ship to new coordinates.
-
+        
         Args:
             ship_name (str): The name of the ship to move.
         """
@@ -227,11 +226,11 @@ class Battleships:
     def validate_guess(self, guess, guesses_board):
         """
         Validate a player's guess.
-
+        
         Args:
             guess (str): The raw input guess.
             guesses_board (list): The board tracking previous guesses.
-
+            
         Returns:
             tuple: (row, col) if valid, "duplicate" if already guessed,
                    or False if invalid.
@@ -283,12 +282,12 @@ class Battleships:
     def check_if_ship_sunk(self, ships, row, col):
         """
         Check if a ship is completely sunk.
-
+        
         Args:
             ships (list): List of ships (each a list of coordinate tuples).
             row (int): Row of the hit.
             col (int): Column of the hit.
-
+            
         Returns:
             bool: True if the ship is sunk, False otherwise.
         """
@@ -302,7 +301,7 @@ class Battleships:
     def computer_turn(self, difficulty="easy"):
         """
         Handle the computer's turn based on the selected difficulty.
-
+        
         Args:
             difficulty (str): The game difficulty ("easy" or "hard").
         """
@@ -384,10 +383,10 @@ class Battleships:
     def all_ships_sunk(self, board):
         """
         Check if all ships on a given board have been sunk.
-
+        
         Args:
             board (list): The board to check.
-
+            
         Returns:
             bool: True if all ships are sunk, False otherwise.
         """
@@ -399,7 +398,7 @@ class Battleships:
     def play_game(self, difficulty="easy"):
         """
         Main game loop that alternates turns between the player and the computer.
-
+        
         Args:
             difficulty (str): The game difficulty ("easy" or "hard").
         """
