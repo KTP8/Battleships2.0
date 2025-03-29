@@ -171,7 +171,7 @@ python -m unittest discover
 ```
 _This command searches for and executes all tes cases in files with names beginning wth **test**._
 
-SEE IMAGE OF AUTOMATED TEST
+![Automated Test Screenshot](https://imgur.com/CecsNch.png)
 
 ---
 
@@ -195,10 +195,18 @@ Manual testing was conducted to verify robust handling of all potential errors:
 
 _Screenshots of manual testing examples are provided:_
 
-- ![Manual Test - Coordinate Input](INSERT_MANUAL_TEST_COORDINATE_URL_HERE)
-- ![Manual Test - Name Input](INSERT_MANUAL_TEST_NAME_URL_HERE)
-- ![Manual Test - Duplicate Guess](INSERT_MANUAL_TEST_DUPLICATE_GUESS_URL_HERE)
-- ![Manual Test - Stage Prompts](INSERT_MANUAL_TEST_STAGE_PROMPT_URL_HERE)
+- ![Manual Test - Name Input](https://imgur.com/9PEuvYM.png)
+_Name Input_
+
+- ![Manual Test - Coordinate Input](https://imgur.com/HUwiWku.png)
+_Coordinate Input Validation_
+
+- ![Manual Test - Stage Prompts](https://imgur.com/Bqdeojc.png)
+- ![Manual Test - Stage Prompts](https://imgur.com/htthoW3.png)
+_Stage Prompts to Confirm Next Stage_
+
+- ![Manual Test - Duplicate Guess](https://imgur.com/RjowqTz.png)
+_Duplicate Guesses_
 
 ---
 
@@ -254,7 +262,8 @@ Battleships is deployed on Heroku. The deployment process involved:
 - Linking the GitHub repository to Heroku and deploying the app.
 - Verifying that the app runs as expected.
 
-![Deployment Screenshot](INSERT_DEPLOYMENT_SCREENSHOT_URL_HERE)
+![Deployment Screenshot](https://imgur.com/3OqX5Cj.png)
+![Working App](https://imgur.com/b54KU8G.png)
 
 ---
 
