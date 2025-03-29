@@ -13,6 +13,45 @@ SHIP_SIZES = {
     "Destroyer": 2
 }
 
+# ---------------------------
+# Helper Functions for Input
+# ---------------------------
+
+def get_valid_orientation():
+    """Prompt the user for an orientation (H/V) with exception handling."""
+    while True:
+        try:
+            orientation = input("Choose orientation (H for horizontal, V for vertical): ").upper().strip()
+        except Exception as e:
+            print(f"Unexpected error reading orientation: {e}. Please try again.")
+            continue
+        if orientation in ["H", "V"]:
+            return orientation
+        else:
+            print("Invalid orientation. Please enter 'H' or 'V'.")
+
+def get_valid_coordinates(ship_name):
+    """Prompt for starting coordinates for a ship with full validation."""
+    print("\nCoordinate system is as follows: top left corner of the board is (0,0) and bottom right corner is (9,9)")
+    print("Horizontal ships fill the spaces from left (start coordinate) to right & Vertical ships fill the spaces from top (start coordinate) down.")
+    print("Enter starting coordinates as (row,col) between (0,0) and (9,9).")
+    while True:
+        try:
+            coord_input = input(f"Enter starting coordinates for your {ship_name} (row,col) WITHOUT parenthesis '()': ").strip()
+            row, col = map(int, coord_input.split(","))
+            if row < 0 or row > 9 or col < 0 or col > 9:
+                print("Coordinates out of bounds. Please enter numbers between 0 and 9.")
+                continue
+            return row, col
+        except ValueError:
+            print("Invalid input. Please enter two numbers separated by a comma (e.g., 3,5).")
+        except Exception as e:
+            print(f"Unexpected error: {e}. Please try again.")
+
+# ---------------------------
+# End Helper Functions
+# ---------------------------
+
 # Helper function to create an empty 10x10 grid
 def create_grid():
     return [[" " for _ in range(10)] for _ in range(10)]
@@ -64,31 +103,11 @@ class Battleships:
                 self.display_board_with_ships()  # Show current state of the board with ships
                 print(f"\nPlace your {ship_name} (size {ship_size}).")
                 
-                # Validate orientation input
-                while True:
-                    orientation = input("Choose orientation (H for horizontal, V for vertical): ").upper().strip()
-                    if orientation in ["H", "V"]:
-                        break
-                    else:
-                        print("Invalid orientation. Please enter 'H' or 'V'.")
+                # Use helper function to get a valid orientation
+                orientation = get_valid_orientation()
                 
-                print("\nCoordinate system is as follows: top left corner of the board is (0,0) \nand bottom right corner is (9,9)")
-                print("\nHorizontal ships fill the spaces from left (start coordinate) to right & \nVertical ships fill the spaces from top (start coordinate) down.")
-                print("\nEnter starting coordinates as (row,col) between (0,0) and (9,9).")
-                
-                # Validate coordinate input
-                while True:
-                    coord_input = input(f"Enter starting coordinates for your {ship_name} \n(row,col) WITHOUT parenthesis '()': ").strip()
-                    try:
-                        row, col = map(int, coord_input.split(","))
-                        if row < 0 or row > 9 or col < 0 or col > 9:
-                            print("Coordinates out of bounds. Please enter numbers between 0 and 9.")
-                            continue
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter two numbers separated by a comma (e.g., 3,5).")
-                    except Exception as e:
-                        print(f"Unexpected error: {e}. Please try again.")
+                # Use helper function to get valid coordinates
+                row, col = get_valid_coordinates(ship_name)
             else:
                 orientation = random.choice(["H", "V"])
                 row, col = random.randint(0, 9), random.randint(0, 9)
@@ -350,4 +369,7 @@ if __name__ == "__main__":
         else:
             print("Invalid difficulty. Please type 'easy' or 'hard'.")
     game = Battleships()
-    game.play_game(difficulty=difficulty)
+    try:
+        game.play_game(difficulty=difficulty)
+    except Exception as e:
+        print(f"An unexpected error occurred during gameplay: {e}")
