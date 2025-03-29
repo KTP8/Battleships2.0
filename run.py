@@ -4,10 +4,6 @@
 
 import random
 
-# ---------------------------
-# Global Definitions
-# ---------------------------
-
 # Define ship types and their sizes
 SHIP_SIZES = {
     "Carrier": 5,
@@ -24,7 +20,7 @@ SHIP_SIZES = {
 
 def get_valid_orientation():
     """
-    Prompt the user for an orientation (H/V) with exception handling.
+    Prompt for an orientation (H/V) with exception handling.
     
     Returns:
         str: A valid orientation ("H" or "V").
@@ -51,12 +47,12 @@ def get_valid_coordinates(ship_name):
     Returns:
         tuple: Two integers representing (row, col).
     """
-    print("\nCoordinate system is as follows: top left corner is (0,0) and bottom right is (9,9).")
-    print("Horizontal ships fill spaces left to right and vertical ships fill spaces top to down.")
-    print("Enter starting coordinates as (row,col) between (0,0) and (9,9).")
+    print("\nCoordinate system is as follows: top left is (0,0) and bottom right is (9,9).")
+    print("Horizontal ships fill spaces left to right; vertical ships, top to down.")
+    print("Enter coordinates as (row,col) between (0,0) and (9,9).")
     while True:
         try:
-            coord_input = input(f"Enter starting coordinates for your {ship_name} (row,col) WITHOUT parenthesis '()': ").strip()
+            coord_input = input(f"Enter starting coordinates for your {ship_name} (row,col) WITHOUT parenthesis: ").strip()
             row, col = map(int, coord_input.split(","))
             if row < 0 or row > 9 or col < 0 or col > 9:
                 print("Coordinates out of bounds. Please enter numbers between 0 and 9.")
@@ -68,24 +64,24 @@ def get_valid_coordinates(ship_name):
             print(f"Unexpected error: {e}. Please try again.")
 
 
+# ---------------------------
+# End Helper Functions
+# ---------------------------
+
+
 def create_grid():
-    """
-    Create and return an empty 10x10 grid.
-    
-    Returns:
-        list: A 10x10 list of lists filled with spaces.
-    """
+    """Create and return an empty 10x10 grid."""
     return [[" " for _ in range(10)] for _ in range(10)]
 
 
 def display_grid(grid, hide_ships=False, player_board=None):
     """
-    Display a grid with labels for rows and columns.
+    Display a grid with row and column labels.
     
     Args:
         grid (list): The grid to display.
         hide_ships (bool): If True, hide ships not on the player's board.
-        player_board (list): Optional; used to reveal player's ships.
+        player_board (list): Optionally used to reveal player's ships.
     """
     print("  " + " ".join(str(i) for i in range(10)))
     for idx, row in enumerate(grid):
@@ -125,9 +121,7 @@ class Battleships:
         self.computer_ships = []
 
     def display_board_with_ships(self):
-        """
-        Display the player's board with the current ship placements.
-        """
+        """Display the player's board with ship placements."""
         print("\nCurrent board with placed ships:")
         display_grid(self.player_board)
 
@@ -174,9 +168,7 @@ class Battleships:
             self.computer_ships.append(ship_coordinates)
 
     def place_all_ships(self):
-        """
-        Place all ships for both the player and the computer.
-        """
+        """Place all ships for both the player and the computer."""
         print("Place your ships on the board.")
         for ship, size in SHIP_SIZES.items():
             self.place_ship(self.player_board, size, ship)
@@ -185,9 +177,7 @@ class Battleships:
             self.place_ship(self.computer_board, size, ship)
 
     def review_ship_placement(self):
-        """
-        Allow the player to review and adjust their ship placement.
-        """
+        """Allow the player to review and adjust ship placement."""
         while True:
             print("\nYour final ship placement:")
             display_grid(self.player_board)
@@ -201,7 +191,7 @@ class Battleships:
             else:
                 print("\nCurrent ship placements:")
                 for i, ship in enumerate(SHIP_SIZES.keys()):
-                    print(f"{i + 1}. {ship}: {self.player_ships[i]}")
+                    print(f"{i+1}. {ship}: {self.player_ships[i]}")
                 ship_to_move = input("Enter the name of the ship you want to move: ").capitalize()
                 if ship_to_move in SHIP_SIZES:
                     self.move_ship(ship_to_move)
@@ -241,11 +231,10 @@ class Battleships:
         try:
             row, col = map(int, guess.split(","))
             if row < 0 or row >= 10 or col < 0 or col >= 10:
-                print("Coordinates out of bounds. Please enter coordinates between (0,0) and (9,9) WITHOUT parenthesis '()'.")
+                print("Coordinates out of bounds. Please enter coordinates between (0,0) and (9,9) WITHOUT parenthesis.")
                 return False
             if guesses_board[row][col] != " ":
-                print("Unlucky! You've already taken a shot there - what a waste of a go! "
-                      "Unfortunately, the game must go on...")
+                print("Unlucky! You've already taken a shot there - what a waste of a go! Unfortunately, the game must go on...")
                 return "duplicate"
             return (row, col)
         except ValueError:
@@ -256,11 +245,9 @@ class Battleships:
             return False
 
     def player_turn(self):
-        """
-        Handle the player's turn.
-        """
+        """Handle the player's turn."""
         while True:
-            guess = input("Enter your guess (row,col) between (0,0) and (9,9) WITHOUT parenthesis '()': ")
+            guess = input("Enter your guess (row,col) between (0,0) and (9,9) WITHOUT parenthesis: ")
             validated_guess = self.validate_guess(guess, self.player_guesses_board)
             if validated_guess == "duplicate":
                 break
@@ -300,10 +287,10 @@ class Battleships:
 
     def computer_turn(self, difficulty="easy"):
         """
-        Handle the computer's turn based on the selected difficulty.
+        Handle the computer's turn based on difficulty.
         
         Args:
-            difficulty (str): The game difficulty ("easy" or "hard").
+            difficulty (str): "easy" or "hard".
         """
         if difficulty == "easy":
             self.random_computer_turn()
@@ -311,9 +298,7 @@ class Battleships:
             self.smart_computer_turn()
 
     def random_computer_turn(self):
-        """
-        Perform a simple random guess for the computer's turn.
-        """
+        """Simple random guessing for the computer's turn."""
         while True:
             row, col = random.randint(0, 9), random.randint(0, 9)
             if (row, col) not in self.computer_guesses:
@@ -336,7 +321,7 @@ class Battleships:
 
     def smart_computer_turn(self):
         """
-        Use an advanced guessing strategy for the computer on hard difficulty.
+        Advanced guessing strategy for computer on hard difficulty.
         """
         if self.last_computer_hit and self.last_hit_direction:
             row, col = self.last_computer_hit
@@ -369,10 +354,7 @@ class Battleships:
                         self.last_hit_direction = None
                     else:
                         if self.last_hit_direction is None:
-                            if r == row:
-                                self.last_hit_direction = "H"
-                            else:
-                                self.last_hit_direction = "V"
+                            self.last_hit_direction = "H" if r == row else "V"
                 else:
                     print("Computer missed!")
                     self.computer_guesses_board[r][c] = "X"
@@ -382,7 +364,7 @@ class Battleships:
 
     def all_ships_sunk(self, board):
         """
-        Check if all ships on a given board have been sunk.
+        Check if all ships on a board have been sunk.
         
         Args:
             board (list): The board to check.
@@ -397,18 +379,19 @@ class Battleships:
 
     def play_game(self, difficulty="easy"):
         """
-        Main game loop that alternates turns between the player and the computer.
+        Main game loop that alternates turns between player and computer.
         
         Args:
-            difficulty (str): The game difficulty ("easy" or "hard").
+            difficulty (str): "easy" or "hard".
         """
         print("Welcome to Battleships!")
         print("\nInstructions:")
         print("- 'O' represents placement of your ships.")
         print("- 'X' represents a missed hit.")
         print("- '*' represents a successful hit.")
-        print("You will place your ships and then take turns guessing where the computer's ships are located.")
-        print("The computer will also guess where your ships are hidden.")
+        print("Ships are placed on a 10x10 grid. The game proceeds in stages to ensure "
+              "all messages are visible on a terminal of 80x24.")
+        print("After each guess, press Enter as instructed to view messages and continue.")
         print("The game ends when one player sinks all of the other's ships!\n")
 
         while True:
@@ -432,15 +415,45 @@ class Battleships:
             display_grid(self.player_guesses_board)
             print("\nComputer's Guess Board (with your ships visible):")
             display_grid(self.computer_guesses_board, hide_ships=True, player_board=self.player_board)
+            
+            # ----- Stage A: Wait for user to proceed after player's turn -----
             self.player_turn()
+            print("\nPress Enter to view the scoreboard and proceed to the computer's turn.")
+            while True:
+                key = input("Press Enter to continue: ")
+                if key == "":
+                    break
+                else:
+                    print("Invalid input. Please press only Enter.")
 
+            print(f"\nScoreboard: {player_name} {self.player_sunk_ships} - {self.computer_sunk_ships} Computer")
+            
+            # Proceed to computer's turn
+            print("Press Enter to let the computer take its turn.")
+            while True:
+                key = input("Press Enter to continue: ")
+                if key == "":
+                    break
+                else:
+                    print("Invalid input. Please press only Enter.")
+            
+            self.computer_turn(difficulty=difficulty)
+
+            # ----- End Stage A modifications -----
+
+            # Check if computer's ships are all sunk
             if self.all_ships_sunk(self.computer_board):
                 print(f"\nThe score is {player_name} 5 - {self.computer_sunk_ships} Computer.")
                 print(f"Congratulations, {player_name}! You sank all the computer's ships. You win!")
                 break
 
-            print("\nComputer's turn:")
-            self.computer_turn(difficulty=difficulty)
+            print("\nPress Enter to view guess boards and begin your next turn.")
+            while True:
+                key = input("Press Enter to continue: ")
+                if key == "":
+                    break
+                else:
+                    print("Invalid input. Please press only Enter.")
 
             if self.all_ships_sunk(self.player_board):
                 print(f"\nThe score is {player_name} {self.player_sunk_ships} - 5 Computer.")
