@@ -87,6 +87,8 @@ class Battleships:
                         break
                     except ValueError:
                         print("Invalid input. Please enter two numbers separated by a comma (e.g., 3,5).")
+                    except Exception as e:
+                        print(f"Unexpected error: {e}. Please try again.")
             else:
                 orientation = random.choice(["H", "V"])
                 row, col = random.randint(0, 9), random.randint(0, 9)
@@ -170,6 +172,9 @@ class Battleships:
             return (row, col)
         except ValueError:
             print("Invalid input. Please enter row,col (e.g., 2,3).")
+            return False
+        except Exception as e:
+            print(f"Unexpected error: {e}. Please enter a valid guess.")
             return False
 
     # Handle player's turn
