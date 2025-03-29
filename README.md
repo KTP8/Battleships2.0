@@ -4,6 +4,7 @@ Battleships is a Python terminal game that reimagines the classic Battleships ex
 
 
 [Here is a live version of the project - Click to Play!](https://battleships-ktp8-26036706a071.herokuapp.com)
+(Run on Google Chrome if Safari/FireFox privacy settings mitigate run)
 
 
 ![Screenshot 2024-10-12 at 20 47 53](https://github.com/user-attachments/assets/d4d3e8fb-81d9-44a4-9ea1-ca893c3153a6)
