@@ -17,6 +17,7 @@ SHIP_SIZES = {
 def create_grid():
     return [[" " for _ in range(10)] for _ in range(10)]
 
+
 # Display a grid with labels for rows and columns
 def display_grid(grid, hide_ships=False, player_board=None):
     print("  " + " ".join(str(i) for i in range(10)))
@@ -32,6 +33,7 @@ def display_grid(grid, hide_ships=False, player_board=None):
             else:
                 row_display.append(cell)
         print(f"{idx} " + " ".join(row_display))
+
 
 # Class for the Battleships game
 class Battleships:
@@ -61,11 +63,30 @@ class Battleships:
             if board == self.player_board:
                 self.display_board_with_ships()  # Show current state of the board with ships
                 print(f"\nPlace your {ship_name} (size {ship_size}).")
-                orientation = input("Choose orientation (H for horizontal, V for vertical): ").upper() 
+                
+                # Validate orientation input
+                while True:
+                    orientation = input("Choose orientation (H for horizontal, V for vertical): ").upper().strip()
+                    if orientation in ["H", "V"]:
+                        break
+                    else:
+                        print("Invalid orientation. Please enter 'H' or 'V'.")
+                
                 print("\nCoordinate system is as follows: top left corner of the board is (0,0) \nand bottom right corner is (9,9)")
                 print("\nHorizontal ships fill the spaces from left (start coordinate) to right & \nVertical ships fill the spaces from top (start coordinate) down.")
                 print("\nEnter starting coordinates as (row,col) between (0,0) and (9,9).")
-                row, col = map(int, input(f"Enter starting coordinates for your {ship_name} \n(row,col) WITHOUT parenthesis '()': ").split(","))
+                
+                # Validate coordinate input
+                while True:
+                    coord_input = input(f"Enter starting coordinates for your {ship_name} \n(row,col) WITHOUT parenthesis '()': ").strip()
+                    try:
+                        row, col = map(int, coord_input.split(","))
+                        if row < 0 or row > 9 or col < 0 or col > 9:
+                            print("Coordinates out of bounds. Please enter numbers between 0 and 9.")
+                            continue
+                        break
+                    except ValueError:
+                        print("Invalid input. Please enter two numbers separated by a comma (e.g., 3,5).")
             else:
                 orientation = random.choice(["H", "V"])
                 row, col = random.randint(0, 9), random.randint(0, 9)
@@ -108,7 +129,11 @@ class Battleships:
         while True:
             print("\nYour final ship placement:")
             display_grid(self.player_board)
-            happy = input("Are you happy with your ship placement? (yes/no): ").lower()
+            happy = ""
+            while happy not in ["yes", "no"]:
+                happy = input("Are you happy with your ship placement? (yes/no): ").lower().strip()
+                if happy not in ["yes", "no"]:
+                    print("Please answer 'yes' or 'no'.")
             if happy == "yes":
                 break
             else:
@@ -131,7 +156,6 @@ class Battleships:
         size = SHIP_SIZES[ship_name]
         print(f"\nEnter new placement for {ship_name} (size {size}):")
         self.place_ship(self.player_board, size, ship_name)
-
 
     # Validate a guess to ensure it is within bounds and has not been guessed already
     def validate_guess(self, guess, guesses_board):
@@ -265,12 +289,16 @@ class Battleships:
         print("You will place your ships and then take turns guessing where the \ncomputer's ships are located.")
         print("The computer will also guess where your ships are hidden.")
         print("The game ends when one player sinks all of the other's ships!\n")
-
-        player_name = input("Enter your name: ")
+        
+        # Validate player's name
+        player_name = ""
+        while not player_name:
+            player_name = input("Enter your name: ").strip()
+            if not player_name:
+                print("Name cannot be blank. Please enter your name.")
         print(f"Hello, {player_name}. Let's start!")
 
         self.place_all_ships()
-
         self.review_ship_placement()
 
         while True:
@@ -300,6 +328,12 @@ class Battleships:
 
 # Start the game
 if __name__ == "__main__":
-    difficulty = input("Choose difficulty (easy/hard): ").lower()
+    # Validate difficulty input
+    while True:
+        difficulty = input("Choose difficulty (easy/hard): ").strip().lower()
+        if difficulty in ["easy", "hard"]:
+            break
+        else:
+            print("Invalid difficulty. Please type 'easy' or 'hard'.")
     game = Battleships()
     game.play_game(difficulty=difficulty)
