@@ -161,6 +161,10 @@ class Battleships:
 
     # Validate a guess to ensure it is within bounds and has not been guessed already
     def validate_guess(self, guess, guesses_board):
+        # Check for empty input first
+        if not guess.strip():
+            print("Empty guess is not allowed. Please enter a valid guess (e.g., 2,3).")
+            return False
         try:
             row, col = map(int, guess.split(","))
             if (row < 0 or row >= 10) or (col < 0 or col >= 10):
