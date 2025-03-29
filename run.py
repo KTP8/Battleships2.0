@@ -299,12 +299,17 @@ class Battleships:
         print("The computer will also guess where your ships are hidden.")
         print("The game ends when one player sinks all of the other's ships!\n")
         
-        # Validate player's name
-        player_name = ""
-        while not player_name:
-            player_name = input("Enter your name: ").strip()
+        # Validate player's name with exception handling
+        while True:
+            try:
+                player_name = input("Enter your name: ").strip()
+            except Exception as e:
+                print(f"Unexpected error reading your name: {e}. Please try again.")
+                continue
             if not player_name:
                 print("Name cannot be blank. Please enter your name.")
+                continue
+            break
         print(f"Hello, {player_name}. Let's start!")
 
         self.place_all_ships()
