@@ -14,7 +14,7 @@ SHIP_SIZES = {
 }
 
 # ---------------------------
-# Helper Functions for Input
+# Helper Functions for Input (from Stage 5)
 # ---------------------------
 
 def get_valid_orientation():
@@ -189,9 +189,10 @@ class Battleships:
             if (row < 0 or row >= 10) or (col < 0 or col >= 10):
                 print("Coordinates out of bounds. \nPlease enter coordinates between (0,0) and (9,9) WITHOUT parenthesis '()'.")
                 return False
+            # If the cell already has been guessed, print special duplicate message and return marker.
             if guesses_board[row][col] != " ":
-                print("You have already guessed those coordinates. Try again.")
-                return False
+                print("Unlucky! You've already taken a shot there - what a waste of a go! Unfortunately, the game must go on...")
+                return "duplicate"
             return (row, col)
         except ValueError:
             print("Invalid input. Please enter row,col (e.g., 2,3).")
@@ -205,7 +206,10 @@ class Battleships:
         while True:
             guess = input("Enter your guess (row,col) \nbetween (0,0) and (9,9) WITHOUT parenthesis '()': ")
             validated_guess = self.validate_guess(guess, self.player_guesses_board)
-            if validated_guess:
+            # If the guess was a duplicate, count the turn and break.
+            if validated_guess == "duplicate":
+                break
+            elif validated_guess:
                 row, col = validated_guess
                 self.player_guesses.append((row, col))
                 if self.computer_board[row][col] == "O":
